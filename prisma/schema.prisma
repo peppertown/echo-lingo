@@ -9,6 +9,45 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  password     String
+  nickname     String         @unique
+  created_at   DateTime       @default(now())
+  Word         Word[]
+  Conversation Conversation[]
+}
+
+model Word {
+  id          Int        @id @default(autoincrement())
+  user_id     Int
+  word        String
+  mean        String
+  created_at  DateTime   @default(now())
+  isGenerated Boolean    @default(false)
+  user        User       @relation(fields: [user_id], references: [id])
+  Sentence    Sentence[]
+}
+
+model Sentence {
+  id         Int      @id @default(autoincrement())
+  word_id    Int
+  sentence   String
+  mean       String
+  created_at DateTime @default(now())
+  word       Word     @relation(fields: [word_id], references: [id])
+}
+
+model Conversation {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  user         User     @relation(fields: [user_id], references: [id])
+  conversation String
+  mean         String
+  created_at   DateTime @default(now())
 }
