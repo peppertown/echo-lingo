@@ -1,25 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SignupDto } from './dto/signup.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly prisma: PrismaService) {}
 
-  signup = (signupDto: SignupDto) => {
+  async signup(signupDto: SignupDto) {
     const { email, password, nickname } = signupDto;
-    console.log({ email, password, nickname });
     try {
-      const result = this.prisma.user.create({
-        data: { email, password, nickname },
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = await this.prisma.user.create({
+        data: { email, password: hashedPassword, nickname },
       });
-      return result;
+      return { message: '회원가입이 완료되었습니다', ID: user.id };
     } catch (err) {
       return err;
     }
-  };
-
-  getUsers = () => {
-    return this.prisma.user.findMany();
-  };
+  }
 }
