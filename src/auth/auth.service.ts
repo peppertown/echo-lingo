@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SignupDto } from './dto/signup.dto';
 import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -18,5 +19,21 @@ export class AuthService {
     } catch (err) {
       return err;
     }
+  }
+
+  async login(loginDto: LoginDto) {
+    const { email, password } = loginDto;
+
+    const isExist = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!isExist || !(await bcrypt.compare(password, isExist.password))) {
+      throw new UnauthorizedException(
+        '이메일 또는 비밀번호가 올바르지 않습니다',
+      );
+    }
+
+    return { message: '로그인 성공' };
   }
 }
