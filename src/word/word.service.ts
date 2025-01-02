@@ -28,4 +28,17 @@ export class WordService {
 
     return words;
   }
+
+  async addWord(wordList) {
+    try {
+      wordList.map(async (word) => {
+        await this.prisma.word.create({
+          data: { word: word.word, mean: word.mean, user_id: 1 },
+        });
+      });
+      return true;
+    } catch (err) {
+      return err;
+    }
+  }
 }
