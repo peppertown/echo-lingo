@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, ValidateNested } from 'class-validator';
 
 export class WordDto {
   @IsString({ message: '단어를 입력해주세요' })
@@ -6,4 +6,9 @@ export class WordDto {
 
   @IsString({ message: '뜻을 입력해주세요' })
   mean: string;
+}
+
+export class WordDtoList {
+  @ValidateNested({ each: true })
+  words: WordDto;
 }
