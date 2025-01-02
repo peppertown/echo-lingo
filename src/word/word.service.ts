@@ -31,10 +31,9 @@ export class WordService {
 
   async addWord(wordList) {
     try {
-      wordList.map(async (word) => {
-        await this.prisma.word.create({
-          data: { word: word.word, mean: word.mean, user_id: 1 },
-        });
+      wordList.map((word) => (word.user_id = 1));
+      await this.prisma.word.createMany({
+        data: wordList,
       });
       return true;
     } catch (err) {
