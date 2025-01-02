@@ -8,7 +8,7 @@ export class WordDto {
   mean: string;
 }
 
-export class WordDtoList {
+export class WordListDto {
   @ValidateNested({ each: true })
   words: WordDto;
 }
