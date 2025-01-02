@@ -56,4 +56,17 @@ export class WordService {
       return err;
     }
   }
+
+  async deleteWord(id: number) {
+    try {
+      await this.prisma.word.delete({
+        where: {
+          id,
+        },
+      });
+      return true;
+    } catch (err) {
+      return err;
+    }
+  }
 }
