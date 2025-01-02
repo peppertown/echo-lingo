@@ -40,4 +40,20 @@ export class WordService {
       return err;
     }
   }
+
+  async updateWord(id: number, wordData) {
+    const { word, mean } = wordData;
+    try {
+      await this.prisma.word.update({
+        where: { id },
+        data: {
+          word,
+          mean,
+        },
+      });
+      return true;
+    } catch (err) {
+      return err;
+    }
+  }
 }
