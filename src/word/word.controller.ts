@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { WordService } from './word.service';
 import { CreateWordDto } from './dto/create-word.dto';
 import { UpdateWordDto } from './dto/update-word.dto';
@@ -7,14 +15,14 @@ import { UpdateWordDto } from './dto/update-word.dto';
 export class WordController {
   constructor(private readonly wordService: WordService) {}
 
+  @Get()
+  getAllWords() {
+    return this.wordService.getAllWords();
+  }
+
   @Post()
   create(@Body() createWordDto: CreateWordDto) {
     return this.wordService.create(createWordDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.wordService.findAll();
   }
 
   @Get(':id')
