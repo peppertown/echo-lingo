@@ -25,9 +25,9 @@ export class WordController {
     return await this.wordService.create(createWordDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.wordService.findOne(+id);
+  @Get(':date')
+  getWordsByDate(@Param('date') date: string) {
+    return this.wordService.getWordsByDate(date);
   }
 
   @Patch(':id')

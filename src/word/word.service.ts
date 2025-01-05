@@ -21,8 +21,22 @@ export class WordService {
     return { message: '등록이 완료되었습니다' };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} word`;
+  async getWordsByDate(date: string) {
+    // date를 UTC 기준의 시작 날짜로 설정
+    const startDate = new Date(`${date}T00:00:00.000Z`);
+    const endDate = new Date(`${date}T23:59:59.999Z`);
+
+    // Prisma 쿼리
+    const words = await this.prisma.word.findMany({
+      where: {
+        created_at: {
+          gte: startDate, // UTC 기준 시작 시간
+          lte: endDate, // UTC 기준 종료 시간
+        },
+      },
+    });
+
+    return words;
   }
 
   update(id: number, updateWordDto: UpdateWordDto) {
