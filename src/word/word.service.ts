@@ -6,8 +6,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class WordService {
   constructor(private readonly prisma: PrismaService) {}
-  getAllWords() {
-    return this.prisma.word.findMany({
+  async getAllWords() {
+    return await this.prisma.word.findMany({
       orderBy: {
         id: 'desc',
       },

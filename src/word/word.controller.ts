@@ -16,8 +16,8 @@ export class WordController {
   constructor(private readonly wordService: WordService) {}
 
   @Get()
-  getAllWords() {
-    return this.wordService.getAllWords();
+  async getAllWords() {
+    return await this.wordService.getAllWords();
   }
 
   @Post()
