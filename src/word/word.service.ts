@@ -14,8 +14,11 @@ export class WordService {
     });
   }
 
-  create(createWordDto: CreateWordDto) {
-    return 'This action adds a new word';
+  async create(createWordDto: CreateWordDto) {
+    await this.prisma.word.createMany({
+      data: createWordDto.words,
+    });
+    return { message: '등록이 완료되었습니다' };
   }
 
   findOne(id: number) {
