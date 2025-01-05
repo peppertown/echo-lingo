@@ -48,7 +48,11 @@ export class WordService {
     return { message: '수정이 완료됐습니다.' };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} word`;
+  async remove(id: number) {
+    await this.prisma.word.delete({
+      where: { id },
+    });
+
+    return { message: '삭제되었습니다.' };
   }
 }

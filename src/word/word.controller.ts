@@ -36,7 +36,7 @@ export class WordController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.wordService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.wordService.remove(id);
   }
 }
