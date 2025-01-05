@@ -31,8 +31,8 @@ export class WordController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWordDto: UpdateWordDto) {
-    return this.wordService.update(+id, updateWordDto);
+  update(@Param('id') id: number, @Body() updateWordDto: UpdateWordDto) {
+    return this.wordService.update(id, updateWordDto);
   }
 
   @Delete(':id')

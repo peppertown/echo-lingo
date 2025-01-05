@@ -39,8 +39,13 @@ export class WordService {
     return words;
   }
 
-  update(id: number, updateWordDto: UpdateWordDto) {
-    return `This action updates a #${id} word`;
+  async update(id: number, updateWordDto: UpdateWordDto) {
+    await this.prisma.word.update({
+      where: { id },
+      data: { ...updateWordDto },
+    });
+
+    return { message: '수정이 완료됐습니다.' };
   }
 
   remove(id: number) {
