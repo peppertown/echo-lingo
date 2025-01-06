@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // DTO 클래스에 정의되지 않은 프로퍼티를 자동으로 제거
