@@ -19,6 +19,7 @@ export class OpenAiService {
       For each given word and definition, generate a JSON array where each object contains:
       - "sentence": A single clear example sentence using the word in a meaningful context. In the example sentence, replace the given word with a blank (_____).
       - "mean": The Korean translation of the example sentence.
+      반드시 주어진 단어와 뜻에 대해 정확히 일치하는 문장이어야해.
       Ensure the example sentence is grammatically and lexically accurate, and use natural, meaningful contexts only. The output should be compact and must not include unnecessary line breaks, indentation, or extra formatting. The JSON should be minified.
     `;
 
