@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { SentenceService } from './sentence.service';
 
 @Controller('sentence')
@@ -12,6 +12,10 @@ export class SentenceController {
   }
 
   // 예문 날짜별 조회
+  @Get(':date')
+  async getSentenceByDate(@Param('date') date: string) {
+    return await this.sentenceService.getSentenceByDate(date);
+  }
   // 아이디별 조회
   // 재생성
 }

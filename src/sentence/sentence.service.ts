@@ -40,4 +40,21 @@ export class SentenceService {
 
     return { success: true, message: '예문 생성이 완료되었습니다' };
   }
+
+  // 날짜별 예문 조회
+  async getSentenceByDate(date) {
+    const startDate = new Date(`${date}T00:00:00.000Z`);
+    const endDate = new Date(`${date}T23:59:59.999Z`);
+
+    const sentences = await this.prisma.sentence.findMany({
+      where: {
+        created_at: {
+          gte: startDate, // UTC 기준 시작 시간
+          lte: endDate, // UTC 기준 종료 시간
+        },
+      },
+    });
+
+    return sentences;
+  }
 }
