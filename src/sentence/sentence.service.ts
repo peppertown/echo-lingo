@@ -57,4 +57,10 @@ export class SentenceService {
 
     return sentences;
   }
+
+  async getSentenceById(id) {
+    return await this.prisma.sentence.findUnique({
+      where: { id },
+    });
+  }
 }

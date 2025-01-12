@@ -16,6 +16,10 @@ export class SentenceController {
   async getSentenceByDate(@Param('date') date: string) {
     return await this.sentenceService.getSentenceByDate(date);
   }
-  // 아이디별 조회
+  // 예문 개별 조회
+  @Get('id/:id')
+  async getSentenceById(@Param('id') id: number) {
+    return await this.sentenceService.getSentenceById(id);
+  }
   // 재생성
 }
