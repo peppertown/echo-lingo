@@ -53,6 +53,7 @@ export class SentenceService {
           lte: endDate, // UTC 기준 종료 시간
         },
       },
+      include: { word: true },
     });
 
     return sentences;
