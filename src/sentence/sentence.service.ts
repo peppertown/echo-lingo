@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { DayjsService } from 'src/dayjs/dayjs.service';
 import { OpenAiService } from 'src/openai/openai.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -7,10 +8,14 @@ export class SentenceService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly openai: OpenAiService,
+    private readonly dayjs: DayjsService,
   ) {}
   async createSentence(words) {
     // 예문 생성
     const result = await this.openai.generateExampleSentences(words);
+
+    // created_at
+    const now = await this.dayjs.now();
 
     const wordsIds = [];
 
@@ -20,6 +25,7 @@ export class SentenceService {
       const ex = JSON.parse(result[i].result)[0];
       wordsIds.push(words[i].id);
       ex.word_id = words[i].id;
+      ex.created_at = now;
       sentences.push(ex);
     }
 
@@ -43,8 +49,8 @@ export class SentenceService {
 
   // 날짜별 예문 조회
   async getSentenceByDate(date) {
-    const startDate = new Date(`${date}T00:00:00.000Z`);
-    const endDate = new Date(`${date}T23:59:59.999Z`);
+    const startDate = await this.dayjs.startDate(date);
+    const endDate = await this.dayjs.endDate(date);
 
     const sentences = await this.prisma.sentence.findMany({
       where: {
