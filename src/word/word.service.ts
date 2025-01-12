@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateWordDto } from './dto/create-word.dto';
 import { UpdateWordDto } from './dto/update-word.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { DayjsService } from 'src/dayjs/dayjs.service';
 
 @Injectable()
 export class WordService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly dayjs: DayjsService,
+  ) {}
 
   // 단어 전체 조회
   async getAllWords() {
@@ -18,8 +22,13 @@ export class WordService {
 
   // 단어 추가
   async create(createWordDto: CreateWordDto) {
+    const now = await this.dayjs.now();
+
     await this.prisma.word.createMany({
-      data: createWordDto.words,
+      data: createWordDto.words.map((word) => ({
+        ...word,
+        created_at: now,
+      })),
     });
     return { message: '등록이 완료되었습니다' };
   }
@@ -27,8 +36,8 @@ export class WordService {
   // 단어 날짜별 조회
   async getWordsByDate(date: string) {
     // date를 UTC 기준의 시작 날짜로 설정
-    const startDate = new Date(`${date}T00:00:00.000Z`);
-    const endDate = new Date(`${date}T23:59:59.999Z`);
+    const startDate = await this.dayjs.startDate(date);
+    const endDate = await this.dayjs.endDate(date);
 
     // Prisma 쿼리
     const words = await this.prisma.word.findMany({
