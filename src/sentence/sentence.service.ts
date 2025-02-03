@@ -69,6 +69,7 @@ export class SentenceService {
   async getSentenceById(id: number) {
     return await this.prisma.sentence.findFirst({
       where: { word_id: id },
+      include: { word: true },
     });
   }
 }
