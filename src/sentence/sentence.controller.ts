@@ -18,8 +18,8 @@ export class SentenceController {
   }
   // 예문 개별 조회
   @Get('id/:id')
-  async getSentenceById(@Param('id') id: number) {
-    return await this.sentenceService.getSentenceById(id);
+  async getSentenceById(@Param('id') wordId: number) {
+    return await this.sentenceService.getSentenceById(wordId);
   }
   // 재생성
 }

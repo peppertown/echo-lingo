@@ -65,9 +65,10 @@ export class SentenceService {
     return sentences;
   }
 
-  async getSentenceById(id) {
-    return await this.prisma.sentence.findUnique({
-      where: { id },
+  // 예문 개별 조회
+  async getSentenceById(id: number) {
+    return await this.prisma.sentence.findFirst({
+      where: { word_id: id },
     });
   }
 }
