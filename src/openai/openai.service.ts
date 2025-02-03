@@ -15,20 +15,19 @@ export class OpenAiService {
     words: { word: string; definition: string }[],
   ): Promise<any[]> {
     const sentences = [];
-    const systemMessage = `
-      For each given word and definition, generate a JSON array where each object contains:
-      - "sentence": A single clear example sentence using the word in a meaningful context. In the example sentence, replace the given word with a blank (_____).
-      - "mean": The Korean translation of the example sentence.
-      반드시 주어진 단어와 뜻에 대해 정확히 일치하는 문장이어야해.
-      Ensure the example sentence is grammatically and lexically accurate, and use natural, meaningful contexts only. The output should be compact and must not include unnecessary line breaks, indentation, or extra formatting. The JSON should be minified.
-    `;
+    const systemMessage = `For each given word and definition, generate a JSON array where each object contains:
+- "sentence": A single clear example sentence using the word in a meaningful context. In the example sentence, replace the given word with a blank (_____).
+- "mean": The Korean translation of the example sentence.
+- The output must be a valid JSON array without any extra formatting, markdown syntax, or unnecessary characters. Do not wrap the JSON in triple backticks or any other symbols.
+- Ensure the example sentence is grammatically and lexically accurate, and use natural, meaningful contexts only.
+- The JSON should be minified (no extra spaces or line breaks).`;
 
     for (const word of words) {
       const { word: currentWord, definition } = word;
 
       try {
         const response = await this.openai.chat.completions.create({
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-4o',
           messages: [
             { role: 'system', content: systemMessage },
             {
