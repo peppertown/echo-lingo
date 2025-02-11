@@ -3,12 +3,14 @@ import { CreateWordDto } from './dto/create-word.dto';
 import { UpdateWordDto } from './dto/update-word.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { DayjsService } from 'src/dayjs/dayjs.service';
+import { OpenAiService } from 'src/openai/openai.service';
 
 @Injectable()
 export class WordService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly dayjs: DayjsService,
+    private readonly openai: OpenAiService,
   ) {}
 
   // 단어 전체 조회
