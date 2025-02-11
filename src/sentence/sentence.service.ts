@@ -13,7 +13,6 @@ export class SentenceService {
   async createSentence(words) {
     // 예문 생성
     const result = await this.openai.generateExampleSentences(words);
-
     // created_at
     const now = await this.dayjs.now();
 
@@ -22,7 +21,7 @@ export class SentenceService {
     // 예문 생성 후 파싱 및 id 추가
     const sentences = [];
     for (let i = 0; i < result.length; i++) {
-      const ex = JSON.parse(result[i].result)[0];
+      const ex = JSON.parse(result[i].result);
       wordsIds.push(words[i].id);
       ex.word_id = words[i].id;
       ex.created_at = now;

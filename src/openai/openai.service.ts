@@ -15,12 +15,11 @@ export class OpenAiService {
     words: { word: string; definition: string }[],
   ): Promise<any[]> {
     const sentences = [];
-    const systemMessage = `For each given word and definition, generate a JSON array where each object contains:
-- "sentence": A single clear example sentence using the word in a meaningful context. In the example sentence, replace the given word with a blank (_____).
+    const systemMessage = `For each word and definition, generate a single object with:
+- "sentence": A single clear example sentence using the word in context, with the word replaced by a blank (_____).
 - "mean": The Korean translation of the example sentence.
-- The output must be a valid JSON array without any extra formatting, markdown syntax, or unnecessary characters. Do not wrap the JSON in triple backticks or any other symbols.
-- Ensure the example sentence is grammatically and lexically accurate, and use natural, meaningful contexts only.
-- The JSON should be minified (no extra spaces or line breaks).`;
+Ensure the example sentence is grammatically and lexically accurate, and use natural, meaningful contexts only.
+Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).`;
 
     for (const word of words) {
       const { word: currentWord, definition } = word;
@@ -48,7 +47,6 @@ export class OpenAiService {
         );
       }
     }
-
     return sentences;
   }
 }
