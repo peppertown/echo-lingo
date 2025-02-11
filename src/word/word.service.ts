@@ -26,8 +26,12 @@ export class WordService {
   async create(createWordDto: CreateWordDto) {
     const now = await this.dayjs.now();
 
+    const evaluateLevel = await this.openai.evaluateWordLevel(
+      createWordDto.words,
+    );
+    const words = JSON.parse(evaluateLevel);
     await this.prisma.word.createMany({
-      data: createWordDto.words.map((word) => ({
+      data: words.map((word) => ({
         ...word,
         created_at: now,
       })),
