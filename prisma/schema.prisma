@@ -27,6 +27,7 @@ model Word {
   mean        String
   created_at  DateTime   @default(now())
   isGenerated Boolean    @default(false)
+  level       String
   Sentence    Sentence[]
 }
 
