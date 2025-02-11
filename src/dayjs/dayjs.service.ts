@@ -12,6 +12,11 @@ export class DayjsService {
     return now;
   }
 
+  async tomorrow(now) {
+    const tomorrow = dayjs(now).add(1, 'day');
+    return tomorrow;
+  }
+
   // where절 사용을 위한 date 생성
   async startDate(date) {
     return dayjs.utc(date).startOf('day').toDate();
