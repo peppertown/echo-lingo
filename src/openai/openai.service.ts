@@ -11,6 +11,7 @@ export class OpenAiService {
     this.openai = new OpenAI({ apiKey });
   }
 
+  // 예문 생성
   async generateExampleSentences(
     words: { word: string; definition: string }[],
   ): Promise<any[]> {
@@ -48,5 +49,41 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       }
     }
     return sentences;
+  }
+
+  // 단어 난이도 측정
+  async evaluateWordLevel(words: { word: string; mean: string }[]) {
+    const systemMessage = `For each word and its meaning, return the CEFR level (A1-C2):
+  - A1 or A2: Basic meaning
+  - B1 or B2: Moderate complexity
+  - C1 or C2: Advanced or specific meaning
+  Return a JSON array with each object containing:
+  - "word": the word
+  - "mean": the provided meaning
+  - "level": the CEFR level
+  Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).`;
+
+    try {
+      const wordListMessage = words
+        .map((w) => `Word: ${w.word}, Meaning: ${w.mean}`)
+        .join('\n');
+
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: systemMessage },
+          {
+            role: 'user',
+            content: `Word list with meanings:\n${wordListMessage}`,
+          },
+        ],
+        temperature: 0.3,
+      });
+
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error('Error fetching CEFR levels:', error);
+      throw new Error('CEFR 정보를 가져오는 중 오류 발생');
+    }
   }
 }
