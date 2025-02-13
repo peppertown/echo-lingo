@@ -22,13 +22,15 @@ model User {
 }
 
 model Word {
-  id          Int        @id @default(autoincrement())
-  word        String
-  mean        String
-  created_at  DateTime   @default(now())
-  isGenerated Boolean    @default(false)
-  level       String
-  Sentence    Sentence[]
+  id               Int        @id @default(autoincrement())
+  word             String
+  mean             String
+  created_at       DateTime   @default(now())
+  isGenerated      Boolean    @default(false)
+  level            String
+  interval         Int
+  next_review_date DateTime
+  Sentence         Sentence[]
 }
 
 model Sentence {
