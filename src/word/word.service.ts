@@ -25,6 +25,7 @@ export class WordService {
   // 단어 추가
   async create(createWordDto: CreateWordDto) {
     const now = await this.dayjs.now();
+    const tomorrow = await this.dayjs.tomorrow(now);
 
     const evaluateLevel = await this.openai.evaluateWordLevel(
       createWordDto.words,
@@ -34,6 +35,8 @@ export class WordService {
       data: words.map((word) => ({
         ...word,
         created_at: now,
+        next_review_date: tomorrow,
+        interval: 1,
       })),
     });
     return { message: '등록이 완료되었습니다' };
