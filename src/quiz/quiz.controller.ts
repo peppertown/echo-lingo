@@ -10,4 +10,9 @@ export class QuizController {
   async todayReview() {
     return this.quizService.getQuiz('today');
   }
+
+  @Get('interval')
+  async intervalReview() {
+    return this.quizService.getQuiz('interval');
+  }
 }
