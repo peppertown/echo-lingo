@@ -6,6 +6,7 @@ import { WordModule } from './word/word.module';
 import { OpenAiModule } from './openai/openai.module';
 import { SentenceModule } from './sentence/sentence.module';
 import { DayjsModule } from './dayjs/dayjs.module';
+import { QuizModule } from './quiz/quiz.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DayjsModule } from './dayjs/dayjs.module';
     OpenAiModule,
     SentenceModule,
     DayjsModule,
+    QuizModule,
   ],
   controllers: [AppController],
   providers: [AppService],
