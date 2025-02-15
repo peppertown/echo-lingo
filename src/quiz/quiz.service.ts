@@ -9,15 +9,17 @@ export class QuizService {
     private readonly dayjs: DayjsService,
   ) {}
 
-  // 당일 복습 퀴즈
-  async reveiwQuiz() {
+  // 퀴즈 조회; 키워드에 따라 당일 복습 or 주기 복습
+  async getQuiz(keyword: 'today' | 'interval') {
     const now = await this.dayjs.now();
     const startDate = await this.dayjs.startDate(now);
     const endDate = await this.dayjs.endDate(now);
 
+    const clause = keyword == 'today' ? 'created_at' : 'next_review_date';
+
     return this.prisma.word.findMany({
       where: {
-        created_at: {
+        [clause]: {
           gte: startDate,
           lte: endDate,
         },
