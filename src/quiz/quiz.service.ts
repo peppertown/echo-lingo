@@ -22,6 +22,7 @@ export class QuizService {
           ? {
               created_at: {
                 gte: startDate,
+                lte: endDate,
               },
             }
           : {
