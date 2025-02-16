@@ -46,4 +46,17 @@ export class QuizService {
       },
     });
   }
+
+  // interval (복습 주기) 초기화 / 퀴즈 오답 시
+  async initializeInterval(words) {
+    const ids = words.map((word) => word.id);
+    await this.prisma.word.updateMany({
+      where: {
+        id: { in: ids },
+      },
+      data: {
+        interval: 1,
+      },
+    });
+  }
 }
