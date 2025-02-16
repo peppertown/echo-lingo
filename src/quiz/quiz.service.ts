@@ -15,15 +15,21 @@ export class QuizService {
     const startDate = await this.dayjs.startDate(now);
     const endDate = await this.dayjs.endDate(now);
 
-    const clause = keyword == 'today' ? 'created_at' : 'next_review_date';
-
+    // 당일 복습; 당일에 등록한 단어만 복습
     return this.prisma.word.findMany({
-      where: {
-        [clause]: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
+      where:
+        keyword == 'today'
+          ? {
+              created_at: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
+          : {
+              next_review_date: {
+                lte: endDate,
+              },
+            },
       include: { Sentence: true },
     });
   }
