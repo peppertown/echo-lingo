@@ -22,7 +22,6 @@ export class QuizService {
           ? {
               created_at: {
                 gte: startDate,
-                lte: endDate,
               },
             }
           : {
@@ -30,7 +29,20 @@ export class QuizService {
                 lte: endDate,
               },
             },
-      include: { Sentence: true },
+      select: {
+        id: true,
+        word: true,
+        mean: true,
+        level: true,
+        interval: true,
+        Sentence: {
+          select: {
+            id: true,
+            sentence: true,
+            mean: true,
+          },
+        },
+      },
     });
   }
 }
