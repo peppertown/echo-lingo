@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { QuizService } from './quiz.service';
 
 @Controller('quiz')
@@ -14,5 +14,11 @@ export class QuizController {
   @Get('interval')
   async intervalReview() {
     return this.quizService.getQuiz('interval');
+  }
+
+  @Post('result')
+  async handleQuiz(@Body() results) {
+    await this.quizService.modifyInterval(results.right);
+    await this.quizService.initializeInterval(results.wrong);
   }
 }
