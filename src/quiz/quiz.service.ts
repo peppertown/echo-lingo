@@ -60,6 +60,23 @@ export class QuizService {
     });
   }
 
+  // 퀴즈 정답 시 레벨별 복습주기 수정
+  async modifyInterval(words) {
+    const now = await this.dayjs.now();
+    words.map(async (word) => {
+      const nextInterval = await this.calculateInterval(word);
+      const nextReviewDate = await this.dayjs.laterDays(now, nextInterval);
+
+      await this.prisma.word.update({
+        where: { id: word.id },
+        data: {
+          interval: nextInterval,
+          next_review_date: nextReviewDate.toDate(),
+        },
+      });
+    });
+  }
+
   // 단어 난이도 별 복습주기 계산
   async calculateInterval(word) {
     const { level, interval } = word;
