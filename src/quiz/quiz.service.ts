@@ -59,4 +59,22 @@ export class QuizService {
       },
     });
   }
+
+  // 단어 난이도 별 복습주기 계산
+  async calculateInterval(word) {
+    const { level, interval } = word;
+
+    let nextInterval;
+
+    if (level == 'C1' || level == 'C2') {
+      nextInterval = Math.ceil(interval * 1.5);
+    } else if (level == 'B1' || level == 'B2') {
+      nextInterval = interval * 2;
+    } else {
+      nextInterval = interval * 3;
+    }
+
+    // 30일을 넘어갈 시 30일로 return
+    return nextInterval > 30 ? 30 : nextInterval;
+  }
 }
