@@ -11,11 +11,13 @@ export class QuizController {
     return this.quizService.getQuiz('today');
   }
 
+  // 주기 복습 퀴즈
   @Get('interval')
   async intervalReview() {
     return this.quizService.getQuiz('interval');
   }
 
+  // 퀴즈 결과 핸들러
   @Post('result')
   async handleQuiz(@Body() results) {
     await this.quizService.modifyInterval(results.right);
