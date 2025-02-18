@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { OpenAiService } from './openai.service';
 
 @Module({
-  imports: [ConfigModule],
+  imports: [ConfigModule.forRoot()],
   providers: [OpenAiService],
   exports: [OpenAiService],
 })
