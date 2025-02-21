@@ -73,9 +73,14 @@ export class WordService {
 
   // 단어 삭제
   async remove(id: number) {
-    await this.prisma.word.delete({
-      where: { id },
-    });
+    await this.prisma.$transaction([
+      this.prisma.sentence.deleteMany({
+        where: { word_id: id },
+      }),
+      this.prisma.word.delete({
+        where: { id },
+      }),
+    ]);
 
     return { message: '삭제되었습니다.' };
   }
