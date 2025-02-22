@@ -37,7 +37,6 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
           ],
           temperature: 0.7,
         });
-
         sentences.push({
           result: response.choices[0].message.content,
         });
@@ -49,6 +48,33 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       }
     }
     return sentences;
+  }
+
+  async regenerateExample(word: { word: string; mean: string }) {
+    const systemMessage = `For the given word and meaning, generate a single object with:
+      - "sentence": A single clear example sentence using the word in context, with the word replaced by a blank (_____).
+      - "mean": The Korean translation of the example sentence.
+      Ensure the example sentence is grammatically and lexically accurate, and uses natural, meaningful contexts only.
+      The sentence must match the provided meaning precisely. If the generated sentence does not match the intended meaning, regenerate it until it does.
+      Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).
+`;
+
+    try {
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          { role: 'system', content: systemMessage },
+          {
+            role: 'user',
+            content: `Word: ${word.word}, Definition: ${word.mean}`,
+          },
+        ],
+        temperature: 0.7,
+      });
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error(`Error generating sentence for word "${word}":`, error);
+    }
   }
 
   // 단어 난이도 측정
