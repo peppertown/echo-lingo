@@ -80,4 +80,23 @@ export class SentenceService {
       include: { word: true },
     });
   }
+
+  // 예문 재생성
+  async updateSentence(wordId: number) {
+    const word = await this.prisma.word.findUnique({
+      where: { id: wordId },
+      select: { word: true, mean: true },
+    });
+
+    const result = await this.openai.regenerateExample(word);
+
+    const sentence = JSON.parse(result);
+
+    await this.prisma.sentence.updateMany({
+      where: { word_id: wordId },
+      data: { sentence: sentence.sentence, mean: sentence.mean },
+    });
+
+    return { success: true, message: '예문이 재생성되었습니다.' };
+  }
 }

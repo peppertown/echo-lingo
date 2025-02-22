@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { SentenceService } from './sentence.service';
 
 @Controller('sentence')
@@ -22,4 +22,8 @@ export class SentenceController {
     return await this.sentenceService.getSentenceById(wordId);
   }
   // 재생성
+  @Put('id/:id')
+  async updateSentence(@Param('id') wordId: number) {
+    return await this.sentenceService.updateSentence(wordId);
+  }
 }
