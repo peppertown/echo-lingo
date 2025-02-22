@@ -13,7 +13,7 @@ export class OpenAiService {
 
   // 예문 생성
   async generateExampleSentences(
-    words: { word: string; definition: string }[],
+    words: { word: string; mean: string }[],
   ): Promise<any[]> {
     const sentences = [];
     const systemMessage = `For each word and definition, generate a single object with:
@@ -23,7 +23,7 @@ Ensure the example sentence is grammatically and lexically accurate, and use nat
 Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).`;
 
     for (const word of words) {
-      const { word: currentWord, definition } = word;
+      const { word: currentWord, mean } = word;
 
       try {
         const response = await this.openai.chat.completions.create({
@@ -32,7 +32,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
             { role: 'system', content: systemMessage },
             {
               role: 'user',
-              content: `Word: ${currentWord}, Definition: ${definition}`,
+              content: `Word: ${currentWord}, Definition: ${mean}`,
             },
           ],
           temperature: 0.7,
