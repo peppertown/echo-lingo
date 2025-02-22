@@ -9,5 +9,6 @@ import { OpenAiModule } from 'src/openai/openai.module';
   imports: [PrismaModule, DayjsModule, OpenAiModule],
   controllers: [WordController],
   providers: [WordService],
+  exports: [WordService],
 })
 export class WordModule {}
