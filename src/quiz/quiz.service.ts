@@ -51,8 +51,11 @@ export class QuizService {
 
   // 퀴즈 결과 핸들러
   async handleQuiz(results) {
-    await this.modifyInterval(results.right);
-    await this.initializeInterval(results.wrong);
+    const right = await this.wordService.getWordsByIds(results.right);
+    const wrong = await this.wordService.getWordsByIds(results.wrong);
+
+    await this.modifyInterval(right);
+    await this.initializeInterval(wrong);
 
     return { success: true, message: '복습 결과가 반영되었습니다.' };
   }
