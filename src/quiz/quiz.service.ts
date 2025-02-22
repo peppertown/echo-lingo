@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { DayjsService } from 'src/dayjs/dayjs.service';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { WordService } from 'src/word/word.service';
 
 @Injectable()
 export class QuizService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly dayjs: DayjsService,
+    private readonly wordService: WordService,
   ) {}
 
   // 퀴즈 조회; 키워드에 따라 당일 복습 or 주기 복습

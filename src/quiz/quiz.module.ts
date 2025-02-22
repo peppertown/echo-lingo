@@ -3,9 +3,10 @@ import { QuizService } from './quiz.service';
 import { QuizController } from './quiz.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { DayjsModule } from 'src/dayjs/dayjs.module';
+import { WordModule } from 'src/word/word.module';
 
 @Module({
-  imports: [PrismaModule, DayjsModule],
+  imports: [PrismaModule, DayjsModule, WordModule],
   controllers: [QuizController],
   providers: [QuizService],
 })
