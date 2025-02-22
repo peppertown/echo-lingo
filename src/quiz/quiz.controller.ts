@@ -20,7 +20,6 @@ export class QuizController {
   // 퀴즈 결과 핸들러
   @Post('result')
   async handleQuiz(@Body() results) {
-    await this.quizService.modifyInterval(results.right);
-    await this.quizService.initializeInterval(results.wrong);
+    return this.quizService.handleQuiz(results);
   }
 }

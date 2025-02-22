@@ -47,6 +47,14 @@ export class QuizService {
     });
   }
 
+  // 퀴즈 결과 핸들러
+  async handleQuiz(results) {
+    await this.modifyInterval(results.right);
+    await this.initializeInterval(results.wrong);
+
+    return { success: true, message: '복습 결과가 반영되었습니다.' };
+  }
+
   // interval (복습 주기) 초기화 / 퀴즈 오답 시
   async initializeInterval(words) {
     const ids = words.map((word) => word.id);
