@@ -57,6 +57,7 @@ export class QuizService {
 
   // interval (복습 주기) 초기화 / 퀴즈 오답 시
   async initializeInterval(words) {
+    const tomorrow = await this.dayjs.tomorrow(await this.dayjs.now());
     const ids = words.map((word) => word.id);
     await this.prisma.word.updateMany({
       where: {
@@ -64,6 +65,7 @@ export class QuizService {
       },
       data: {
         interval: 1,
+        next_review_date: tomorrow.toDate(),
       },
     });
   }
