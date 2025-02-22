@@ -10,7 +10,16 @@ export class SentenceService {
     private readonly openai: OpenAiService,
     private readonly dayjs: DayjsService,
   ) {}
-  async createSentence(words) {
+  async createSentence(ids: number[]) {
+    const words = await this.prisma.word.findMany({
+      where: { id: { in: ids } },
+      select: {
+        id: true,
+        word: true,
+        mean: true,
+      },
+    });
+
     // 예문 생성
     const result = await this.openai.generateExampleSentences(words);
     // created_at

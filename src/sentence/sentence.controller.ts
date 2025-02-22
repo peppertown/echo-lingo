@@ -7,8 +7,8 @@ export class SentenceController {
 
   // 예문 생성
   @Post()
-  async createSentence(@Body() words) {
-    return await this.sentenceService.createSentence(words);
+  async createSentence(@Body() ids: number[]) {
+    return await this.sentenceService.createSentence(ids);
   }
 
   // 예문 날짜별 조회
