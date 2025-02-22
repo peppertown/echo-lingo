@@ -85,4 +85,11 @@ export class WordService {
 
     return { message: '삭제되었습니다.' };
   }
+
+  // id 배열로 단어 데이터 조회
+  async getWordsByIds(ids: number[]) {
+    return await this.prisma.word.findMany({
+      where: { id: { in: ids } },
+    });
+  }
 }
