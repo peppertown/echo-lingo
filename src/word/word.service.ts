@@ -19,6 +19,7 @@ export class WordService {
       orderBy: {
         id: 'desc',
       },
+      take: 5,
     });
   }
 
