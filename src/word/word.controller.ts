@@ -44,10 +44,4 @@ export class WordController {
   remove(@Param('id') id: number) {
     return this.wordService.remove(id);
   }
-
-  // 단어 스크랩
-  @Post('scrap/:id')
-  handleWordScrap(@Param('id') id: number) {
-    return this.wordService.handleWordScrap(id);
-  }
 }

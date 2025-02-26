@@ -7,7 +7,7 @@ import { OpenAiModule } from './openai/openai.module';
 import { SentenceModule } from './sentence/sentence.module';
 import { DayjsModule } from './dayjs/dayjs.module';
 import { QuizModule } from './quiz/quiz.module';
-import { ScarpModule } from './scarp/scarp.module';
+import { ScrapModule } from './scrap/scrap.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { ScarpModule } from './scarp/scarp.module';
     SentenceModule,
     DayjsModule,
     QuizModule,
-    ScarpModule,
+    ScrapModule,
   ],
   controllers: [AppController],
   providers: [AppService],

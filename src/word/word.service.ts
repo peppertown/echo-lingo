@@ -92,26 +92,4 @@ export class WordService {
       where: { id: { in: ids } },
     });
   }
-
-  // 스크랩 핸들러
-  async handleWordScrap(id: number) {
-    const word = await this.prisma.word.findFirst({
-      where: { id },
-      select: { is_scrapped: true },
-    });
-
-    if (word.is_scrapped) {
-      await this.prisma.word.update({
-        where: { id },
-        data: { is_scrapped: false },
-      });
-      return { success: true, message: '스크랩이 해제되었습니다.' };
-    } else {
-      await this.prisma.word.update({
-        where: { id },
-        data: { is_scrapped: true },
-      });
-      return { success: true, message: '스크랩 되었습니다.' };
-    }
-  }
 }
