@@ -26,4 +26,12 @@ export class ScrapService {
       return { success: true, message: '스크랩 되었습니다.' };
     }
   }
+
+  // 스크랩 단어 조회
+  async getScrapWords() {
+    return await this.prisma.word.findMany({
+      where: { is_scrapped: true },
+      include: { Sentence: true },
+    });
+  }
 }
