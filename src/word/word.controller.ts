@@ -46,7 +46,7 @@ export class WordController {
   }
 
   // 단어 스크랩
-  @Get('scrap/:id')
+  @Post('scrap/:id')
   handleWordScrap(@Param('id') id: number) {
     return this.wordService.handleWordScrap(id);
   }
