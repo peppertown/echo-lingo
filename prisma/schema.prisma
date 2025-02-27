@@ -40,5 +40,5 @@ model Sentence {
   sentence   String
   mean       String
   created_at DateTime @default(now())
-  word       Word     @relation(fields: [word_id], references: [id])
+  word       Word     @relation(fields: [word_id], references: [id], onDelete: Cascade)
 }
