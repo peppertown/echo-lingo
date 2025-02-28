@@ -34,7 +34,7 @@ export class WordController {
   }
 
   // 단어 날짜별 조회
-  @Get(':date')
+  @Get('date/:date')
   getWordsByDate(@Param('date') date: string) {
     return this.wordService.getWordsByDate(date);
   }
