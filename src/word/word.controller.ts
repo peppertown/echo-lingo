@@ -33,6 +33,12 @@ export class WordController {
     return this.wordService.searchWord(keyword);
   }
 
+  // 단어 검색 (openai)
+  @Get('search/mean/:word')
+  async searchWordsMean(@Param('word') word: string) {
+    return this.wordService.searchWordsMean(word);
+  }
+
   // 단어 날짜별 조회
   @Get('date/:date')
   getWordsByDate(@Param('date') date: string) {

@@ -97,4 +97,10 @@ export class WordService {
 
     return result;
   }
+
+  // 단어 검색 (openai api)
+  async searchWordsMean(word: string) {
+    const mean = await this.openai.findWordsMeaning(word);
+    return { mean };
+  }
 }
