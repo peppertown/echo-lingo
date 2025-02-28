@@ -32,6 +32,8 @@ model Word {
   next_review_date DateTime
   is_scrapped      Boolean    @default(false)
   Sentence         Sentence[]
+
+  @@index([created_at], name: "created_at_index")
 }
 
 model Sentence {
@@ -43,4 +45,5 @@ model Sentence {
   word       Word     @relation(fields: [word_id], references: [id], onDelete: Cascade)
 
   @@index([word_id], name: "word_id_index")
+  @@index([created_at], name: "created_at_index")
 }
