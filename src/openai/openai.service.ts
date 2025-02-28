@@ -112,4 +112,27 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       throw new Error('CEFR 정보를 가져오는 중 오류 발생');
     }
   }
+
+  async findWordsMeaning(word: string) {
+    const systemMessage = `이 영어단어의 한국말 뜻을 2~3개 알려줘. 뜻이 뭔지만`;
+
+    try {
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemMessage },
+          {
+            role: 'user',
+            content: word,
+          },
+        ],
+        temperature: 0.2,
+      });
+
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error('Error fetching word mean:', error);
+      throw new Error('단어 정보를 가져오는 중 오류 발생');
+    }
+  }
 }
