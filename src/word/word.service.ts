@@ -86,4 +86,15 @@ export class WordService {
       where: { id: { in: ids } },
     });
   }
+
+  // 단어 검색 (단어 or 뜻)
+  async searchWord(keyword: string) {
+    const result = await this.prisma.word.findMany({
+      where: {
+        OR: [{ word: { contains: keyword } }, { mean: { contains: keyword } }],
+      },
+    });
+
+    return result;
+  }
 }

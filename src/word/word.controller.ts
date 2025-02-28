@@ -27,6 +27,12 @@ export class WordController {
     return await this.wordService.create(createWordDto);
   }
 
+  // 단어 검색
+  @Get('search/:keyword')
+  searchWord(@Param('keyword') keyword: string) {
+    return this.wordService.searchWord(keyword);
+  }
+
   // 단어 날짜별 조회
   @Get(':date')
   getWordsByDate(@Param('date') date: string) {
