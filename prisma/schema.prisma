@@ -41,4 +41,6 @@ model Sentence {
   mean       String
   created_at DateTime @default(now())
   word       Word     @relation(fields: [word_id], references: [id], onDelete: Cascade)
+
+  @@index([word_id], name: "word_id_index")
 }
