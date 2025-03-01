@@ -40,6 +40,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
         sentences.push({
           result: response.choices[0].message.content,
         });
+        console.log(response.choices[0].message.content);
       } catch (error) {
         console.error(
           `Error generating sentence for word "${currentWord}":`,
@@ -133,6 +134,33 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
     } catch (error) {
       console.error('Error fetching word mean:', error);
       throw new Error('단어 정보를 가져오는 중 오류 발생');
+    }
+  }
+
+  // 아티클 생성
+  async generateArticle(level: string) {
+    const systemMessage = `CEFR 표준을 참고하여 레벨 ${level} 수준의 영어 아티클이나 잡지식을 4~5줄 분량으로 작성해줘. 
+거짓 정보가 포함되면 안 돼. 
+아래 JSON 형식을 엄격하게 지켜서 응답해야 해:
+{
+  "title" : "아티클 제목",
+  "article": "아티클 내용",
+  "interpretation": "아티클 내용 한글 해석",
+  "level": "아티클의 난이도"
+}
+Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).`;
+    try {
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'system', content: systemMessage }],
+        temperature: 0.5,
+        max_tokens: 300,
+      });
+
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error('Error generating article:', error);
+      throw new Error('아티클 생성 중 오류 발생');
     }
   }
 }
