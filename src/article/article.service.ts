@@ -40,4 +40,19 @@ export class ArticleService {
       orderBy: { id: 'desc' },
     });
   }
+
+  // id별 카테고리 조회
+  async getCategory(index: number) {
+    const categories = [
+      { id: '1', name: '역사' },
+      { id: '2', name: '과학 및 기술' },
+      { id: '3', name: '문화 및 예술' },
+      { id: '4', name: '유명한 발명품' },
+      { id: '5', name: '심리학 및 인간 행동' },
+      { id: '6', name: '재밌는 잡지식' },
+      { id: '7', name: '스포츠' },
+    ];
+
+    return categories[index - 1].name;
+  }
 }
