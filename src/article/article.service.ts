@@ -10,8 +10,8 @@ export class ArticleService {
   ) {}
 
   // 레벨별 아티클 생성
-  async createArticle(level: string) {
-    const responseData = await this.openai.generateArticle(level);
+  async createArticle(category: string, level: string) {
+    const responseData = await this.openai.generateArticle(category, level);
 
     // JSON 내부 개행문자 제거
     const cleanedData = responseData.replace(/[\n\r]/g, ' ');

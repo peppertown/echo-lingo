@@ -7,8 +7,9 @@ export class ArticleController {
 
   // 아티클 생성
   @Post()
-  async createArticle(@Body() body) {
-    return await this.articleService.createArticle(body.level);
+  async createArticle(@Body() body: { category: string; level: string }) {
+    const { category, level } = body;
+    return await this.articleService.createArticle(category, level);
   }
 
   // 아티클 전체 조회
