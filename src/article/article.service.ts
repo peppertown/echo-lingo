@@ -25,4 +25,11 @@ export class ArticleService {
 
     return { success: true, message: '아티클 생성이 완료되었습니다.' };
   }
+
+  // 아티클 전체 조회
+  async getArticles() {
+    return await this.prisma.article.findMany({
+      orderBy: { id: 'desc' },
+    });
+  }
 }

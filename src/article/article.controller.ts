@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ArticleService } from './article.service';
 
 @Controller('article')
@@ -9,5 +9,11 @@ export class ArticleController {
   @Post()
   async createArticle(@Body() body) {
     return await this.articleService.createArticle(body.level);
+  }
+
+  // 아티클 전체 조회
+  @Get()
+  async getArticles() {
+    return await this.articleService.getArticles();
   }
 }
