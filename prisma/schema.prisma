@@ -47,3 +47,11 @@ model Sentence {
   @@index([word_id], name: "word_id_index")
   @@index([created_at], name: "created_at_index")
 }
+
+model Article {
+  id             Int    @id @default(autoincrement())
+  title          String
+  article        String
+  interpretation String
+  level          String
+}
