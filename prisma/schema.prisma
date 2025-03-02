@@ -51,8 +51,8 @@ model Sentence {
 model Article {
   id               Int                @id @default(autoincrement())
   title            String
-  article          String
-  interpretation   String
+  article          String             @db.Text
+  interpretation   String             @db.Text
   level            String
   Article_category Article_category[]
 }
