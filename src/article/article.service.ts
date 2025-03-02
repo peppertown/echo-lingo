@@ -10,7 +10,8 @@ export class ArticleService {
   ) {}
 
   // 레벨별 아티클 생성
-  async createArticle(category: string, level: string) {
+  async createArticle(categoryId: number, level: string) {
+    const category = await this.getCategory(categoryId);
     const responseData = await this.openai.generateArticle(category, level);
 
     // JSON 내부 개행문자 제거
@@ -19,8 +20,15 @@ export class ArticleService {
     // JSON 파싱
     const article = JSON.parse(cleanedData);
 
-    await this.prisma.article.create({
-      data: { ...article },
+    // 아티클 테이블, 매핑 테이블에 데이터 저장
+    await this.prisma.$transaction(async (prisma) => {
+      const createdArticle = await prisma.article.create({
+        data: { ...article },
+      });
+
+      await prisma.article_category.create({
+        data: { article_id: createdArticle.id, category_id: categoryId },
+      });
     });
 
     return { success: true, message: '아티클 생성이 완료되었습니다.' };
