@@ -38,6 +38,15 @@ export class ArticleService {
   async getArticles() {
     return await this.prisma.article.findMany({
       orderBy: { id: 'desc' },
+      take: 5,
+      select: {
+        id: true,
+        title: true,
+        level: true,
+        Article_category: {
+          select: { category_id: true },
+        },
+      },
     });
   }
 
