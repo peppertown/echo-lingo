@@ -8,6 +8,7 @@ import { SentenceModule } from './sentence/sentence.module';
 import { DayjsModule } from './dayjs/dayjs.module';
 import { QuizModule } from './quiz/quiz.module';
 import { ScrapModule } from './scrap/scrap.module';
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ScrapModule } from './scrap/scrap.module';
     DayjsModule,
     QuizModule,
     ScrapModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
