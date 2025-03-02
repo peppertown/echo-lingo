@@ -67,6 +67,6 @@ model Article_category {
   id          Int      @id @default(autoincrement())
   article_id  Int
   category_id Int
-  article     Article  @relation(fields: [article_id], references: [id])
+  article     Article  @relation(fields: [article_id], references: [id], onDelete: Cascade)
   category    Category @relation(fields: [category_id], references: [id])
 }
