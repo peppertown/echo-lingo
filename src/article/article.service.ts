@@ -50,6 +50,14 @@ export class ArticleService {
     });
   }
 
+  // 아티클 개별 조회
+  async getArticleById(id: number) {
+    return await this.prisma.article.findUnique({
+      where: { id },
+      include: { Article_category: { select: { category_id: true } } },
+    });
+  }
+
   // 아티클 레벨별 조회
   async getArticlesByLevel(level: string) {
     return await this.prisma.article.findMany({

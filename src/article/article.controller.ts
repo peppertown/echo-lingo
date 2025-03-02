@@ -18,6 +18,12 @@ export class ArticleController {
     return await this.articleService.getArticles();
   }
 
+  // 아티클 개별 조회
+  @Get(':id')
+  async getArticleById(@Param('id') id: number) {
+    return await this.articleService.getArticleById(id);
+  }
+
   // 아티클 레벨별 조회
   @Get('level/:level')
   async getArticlesByLevel(@Param('level') level: string) {
