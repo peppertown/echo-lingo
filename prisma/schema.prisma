@@ -49,9 +49,24 @@ model Sentence {
 }
 
 model Article {
-  id             Int    @id @default(autoincrement())
-  title          String
-  article        String
-  interpretation String
-  level          String
+  id               Int                @id @default(autoincrement())
+  title            String
+  article          String
+  interpretation   String
+  level            String
+  Article_category Article_category[]
+}
+
+model Category {
+  id               Int                @id @default(autoincrement())
+  name             String
+  Article_category Article_category[]
+}
+
+model Article_category {
+  id          Int      @id @default(autoincrement())
+  article_id  Int
+  category_id Int
+  article     Article  @relation(fields: [article_id], references: [id])
+  category    Category @relation(fields: [category_id], references: [id])
 }
