@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { createReadStream } from 'fs';
 import OpenAI from 'openai';
 
 @Injectable()
@@ -138,9 +139,10 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
   }
 
   // 아티클 생성
-  async generateArticle(level: string) {
-    const systemMessage = `CEFR 표준을 참고하여 레벨 ${level} 수준의 영어 아티클이나 잡지식을 4~5줄 분량으로 작성해줘. 
-거짓 정보가 포함되면 안 돼. 
+  async generateArticle(category: string, level: string) {
+    const systemMessage = `CEFR 표준을 참고하여 레벨 ${level} 수준으로
+    ${category} 주제에 대한 영어 아티클을 4~5줄 분량으로 작성해줘. 거짓 정보가 포함되면 안 돼. 
+
 아래 JSON 형식을 엄격하게 지켜서 응답해야 해:
 {
   "title" : "아티클 제목",
@@ -148,19 +150,36 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
   "interpretation": "아티클 내용 한글 해석",
   "level": "아티클의 난이도"
 }
+
 Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks).`;
+
     try {
       const response = await this.openai.chat.completions.create({
         model: 'gpt-4o',
         messages: [{ role: 'system', content: systemMessage }],
-        temperature: 0.5,
-        max_tokens: 300,
+        temperature: 0.7,
       });
 
       return response.choices[0].message.content;
     } catch (error) {
       console.error('Error generating article:', error);
       throw new Error('아티클 생성 중 오류 발생');
+    }
+  }
+
+  async transcribeAudio(filePath: string): Promise<string> {
+    try {
+      const audioStream = createReadStream(filePath);
+      const response = await this.openai.audio.transcriptions.create({
+        model: 'whisper-1',
+        file: audioStream,
+        language: 'en', // 한국어는 'ko'
+      });
+
+      return response.text; // 변환된 텍스트 반환
+    } catch (error) {
+      console.error('Error transcribing audio:', error);
+      throw new Error('음성 변환 실패');
     }
   }
 }
