@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { createReadStream } from 'fs';
 import OpenAI from 'openai';
 
 @Injectable()
@@ -164,22 +163,6 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
     } catch (error) {
       console.error('Error generating article:', error);
       throw new Error('아티클 생성 중 오류 발생');
-    }
-  }
-
-  async transcribeAudio(filePath: string): Promise<string> {
-    try {
-      const audioStream = createReadStream(filePath);
-      const response = await this.openai.audio.transcriptions.create({
-        model: 'whisper-1',
-        file: audioStream,
-        language: 'en', // 한국어는 'ko'
-      });
-
-      return response.text; // 변환된 텍스트 반환
-    } catch (error) {
-      console.error('Error transcribing audio:', error);
-      throw new Error('음성 변환 실패');
     }
   }
 }
