@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ArticleService } from './article.service';
 
 @Controller('article')
@@ -16,5 +16,11 @@ export class ArticleController {
   @Get()
   async getArticles() {
     return await this.articleService.getArticles();
+  }
+
+  // 아티클 레벨별 조회
+  @Get('level/:level')
+  async getArticlesByLevel(@Param('level') level: string) {
+    return await this.articleService.getArticlesByLevel(level);
   }
 }

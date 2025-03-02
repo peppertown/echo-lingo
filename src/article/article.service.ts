@@ -32,4 +32,12 @@ export class ArticleService {
       orderBy: { id: 'desc' },
     });
   }
+
+  // 아티클 레벨별 조회
+  async getArticlesByLevel(level: string) {
+    return await this.prisma.article.findMany({
+      where: { level: level },
+      orderBy: { id: 'desc' },
+    });
+  }
 }
