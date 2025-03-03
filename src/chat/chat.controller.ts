@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ChatService } from './chat.service';
 
 @Controller('chat')
@@ -9,5 +9,10 @@ export class ChatController {
   @Get(':topic')
   async selectTopic(@Param('topic') topic: string) {
     return await this.chatService.selectTopic(topic);
+  }
+
+  @Post(':topic/user')
+  async test(@Param('topic') topic: string, @Body() body) {
+    return await this.chatService.handleUserChat(topic, body.content);
   }
 }
