@@ -181,8 +181,8 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       });
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error generating article:', error);
-      throw new Error('아티클 생성 중 오류 발생');
+      console.error('Error starting chat:', error);
+      throw new Error('대화 시작 중 오류 발생');
     }
   }
 
@@ -203,8 +203,8 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       });
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error generating article:', error);
-      throw new Error('아티클 생성 중 오류 발생');
+      console.error('Error checking grammer:', error);
+      throw new Error('사용자 응답 검사 중 오류 발생');
     }
   }
 
@@ -224,8 +224,8 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       });
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('Error generating article:', error);
-      throw new Error('아티클 생성 중 오류 발생');
+      console.error('Error generating next content:', error);
+      throw new Error('대화 응답 생성 중 오류 발생');
     }
   }
 }
