@@ -207,4 +207,25 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
       throw new Error('아티클 생성 중 오류 발생');
     }
   }
+
+  // 다음 대화 응답
+  async getNextContent(topic: string, contents) {
+    const systemMessage = `너의 역할은 AI 영어 튜터야.
+    지금까지 토픽에 대해 진행된 대화 내용을 파악해서 상황에 맞는 응답을 해야해
+    토픽 : ${topic}, 지금까지 진행된 대화내용 : ${JSON.stringify(contents)}.
+
+  { content : "응답"} 이 형식을 지켜서 대답해.
+    Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks). `;
+    try {
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'system', content: systemMessage }],
+        temperature: 0.3,
+      });
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error('Error generating article:', error);
+      throw new Error('아티클 생성 중 오류 발생');
+    }
+  }
 }
