@@ -193,7 +193,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
     자연스럽지 않다면 어떤부분이 문제인지 한글로 알려줘야해.
     토픽 : ${topic}, 지금까지 진행된 대화내용 : ${content}.
 
-  { grammer : "자연스럽다면 true, 아니라면 설명"} 이 형식을 지켜서 대답해. grammer 말고 다른걸 추가하지마.
+  { grammer : "자연스럽다면 문자열 true, 아니라면 설명"} 이 형식을 지켜서 대답해. grammer 말고 다른걸 추가하지마.
     Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks). `;
     try {
       const response = await this.openai.chat.completions.create({
