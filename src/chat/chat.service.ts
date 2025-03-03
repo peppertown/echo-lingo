@@ -11,8 +11,7 @@ export class ChatService {
 
   // 토픽 선정 후 대화 시작
   async selectTopic(topic: string) {
-    const response = await this.openai.startChat(topic);
-    const content = JSON.parse(response);
+    const content = await this.openai.startChat(topic);
 
     await this.prisma.chat_messages.create({
       data: { content: content.content, role: 'system' },

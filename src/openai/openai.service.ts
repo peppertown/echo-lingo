@@ -179,7 +179,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
         messages: [{ role: 'system', content: systemMessage }],
         temperature: 0.7,
       });
-      return response.choices[0].message.content;
+      return JSON.parse(response.choices[0].message.content);
     } catch (error) {
       console.error('Error starting chat:', error);
       throw new Error('대화 시작 중 오류 발생');
@@ -201,7 +201,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
         messages: [{ role: 'system', content: systemMessage }],
         temperature: 0.3,
       });
-      return response.choices[0].message.content;
+      return JSON.parse(response.choices[0].message.content);
     } catch (error) {
       console.error('Error checking grammer:', error);
       throw new Error('사용자 응답 검사 중 오류 발생');
@@ -222,7 +222,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
         messages: [{ role: 'system', content: systemMessage }],
         temperature: 0.3,
       });
-      return response.choices[0].message.content;
+      return JSON.parse(response.choices[0].message.content);
     } catch (error) {
       console.error('Error generating next content:', error);
       throw new Error('대화 응답 생성 중 오류 발생');
