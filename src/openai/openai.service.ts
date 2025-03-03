@@ -187,13 +187,13 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
   }
 
   // 사용자의 응답 검사
-  async checkGrammer(topic: string, contents) {
+  async checkGrammer(topic: string, content: string) {
     const systemMessage = `너의 역할은 AI 영어 튜터야.
-    지금까지 토픽에 대해 진행된 대화 내용을 파악해서 user의 바로 전 응답이 문법적으로 자연스러운지 파악하고, 
+    해당 토픽에 대해 사용자의 content가 문법 및 어휘적으로 자연스러운지 판단하고
     자연스럽지 않다면 어떤부분이 문제인지 한글로 알려줘야해.
-    토픽 : ${topic}, 지금까지 진행된 대화내용 : ${JSON.stringify(contents)}.
+    토픽 : ${topic}, 지금까지 진행된 대화내용 : ${content}.
 
-  { grammer : "응답"} 이 형식을 지켜서 대답해. 올바르다면 true를 반환하고, 아니라면 어떤게 자연스러운지 알려줘
+  { grammer : "자연스럽다면 true, 아니라면 설명"} 이 형식을 지켜서 대답해. grammer 말고 다른걸 추가하지마.
     Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks). `;
     try {
       const response = await this.openai.chat.completions.create({
