@@ -166,6 +166,7 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
     }
   }
 
+  // 토픽 선정 후 대화 시작
   async startChat(topic: string) {
     const systemMessage = `너의 역할은 AI 영어 튜터야. 
     사용자가 토픽에 맞는 상황에서 영어 대화 연습을 할 수 있게 첫마디를 열어. 토픽 : ${topic}
@@ -177,6 +178,28 @@ Output must be valid JSON, without extra symbols like backticks, and must be min
         model: 'gpt-4o',
         messages: [{ role: 'system', content: systemMessage }],
         temperature: 0.7,
+      });
+      return response.choices[0].message.content;
+    } catch (error) {
+      console.error('Error generating article:', error);
+      throw new Error('아티클 생성 중 오류 발생');
+    }
+  }
+
+  // 사용자의 응답 검사
+  async checkGrammer(topic: string, contents) {
+    const systemMessage = `너의 역할은 AI 영어 튜터야.
+    지금까지 토픽에 대해 진행된 대화 내용을 파악해서 user의 바로 전 응답이 문법적으로 자연스러운지 파악하고, 
+    자연스럽지 않다면 어떤부분이 문제인지 한글로 알려줘야해.
+    토픽 : ${topic}, 지금까지 진행된 대화내용 : ${JSON.stringify(contents)}.
+
+  { grammer : "응답"} 이 형식을 지켜서 대답해. 올바르다면 true를 반환하고, 아니라면 어떤게 자연스러운지 알려줘
+    Output must be valid JSON, without extra symbols like backticks, and must be minified (no extra spaces or line breaks). `;
+    try {
+      const response = await this.openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [{ role: 'system', content: systemMessage }],
+        temperature: 0.3,
       });
       return response.choices[0].message.content;
     } catch (error) {
