@@ -9,6 +9,7 @@ import { DayjsModule } from './dayjs/dayjs.module';
 import { QuizModule } from './quiz/quiz.module';
 import { ScrapModule } from './scrap/scrap.module';
 import { ArticleModule } from './article/article.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ArticleModule } from './article/article.module';
     QuizModule,
     ScrapModule,
     ArticleModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
