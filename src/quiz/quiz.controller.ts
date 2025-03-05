@@ -22,4 +22,9 @@ export class QuizController {
   async handleQuiz(@Body() results) {
     return this.quizService.handleQuiz(results);
   }
+  // 복습 불필요
+  @Post('remove')
+  async unnecessaryReview(@Body() body) {
+    return await this.quizService.unnecessaryReview(body.wordIds);
+  }
 }

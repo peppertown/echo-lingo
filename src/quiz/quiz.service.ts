@@ -114,4 +114,15 @@ export class QuizService {
     // 30일을 넘어갈 시 30일로 return
     return nextInterval > 30 ? 30 : nextInterval;
   }
+
+  // 복습 불필요한 문제 처리
+  async unnecessaryReview(wordIds: number[]) {
+    await this.prisma.word.updateMany({
+      where: { id: { in: wordIds } },
+      data: {
+        interval: 0,
+        next_review_date: null,
+      },
+    });
+  }
 }
