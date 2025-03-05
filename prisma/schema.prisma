@@ -29,7 +29,7 @@ model Word {
   isGenerated      Boolean    @default(false)
   level            String
   interval         Int
-  next_review_date DateTime
+  next_review_date DateTime?
   is_scrapped      Boolean    @default(false)
   Sentence         Sentence[]
 
@@ -72,7 +72,7 @@ model Article_category {
 }
 
 model Chat_messages {
- id          Int      @id @default(autoincrement())
- role String 
- content String @db.Text
+  id      Int    @id @default(autoincrement())
+  role    String
+  content String @db.Text
 }
