@@ -124,5 +124,7 @@ export class QuizService {
         next_review_date: null,
       },
     });
+
+    return { success: true, message: '복습목록에서 제외되었습니다.' };
   }
 }
