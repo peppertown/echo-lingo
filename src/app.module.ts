@@ -10,6 +10,7 @@ import { QuizModule } from './quiz/quiz.module';
 import { ScrapModule } from './scrap/scrap.module';
 import { ArticleModule } from './article/article.module';
 import { ChatModule } from './chat/chat.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ChatModule } from './chat/chat.module';
     ScrapModule,
     ArticleModule,
     ChatModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
