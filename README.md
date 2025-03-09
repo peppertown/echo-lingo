@@ -1,99 +1,57 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+![Image](https://github.com/user-attachments/assets/b5bd2bbc-9834-4080-943f-5d8c236a1a29)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> 효과적인 영어 학습을 위한 웹 서비스
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 서비스 소개
 
-## Description
+### 🚀 개요
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+에코링고는 단순한 두 질문에서부터 시작되었습니다.
 
-## Project setup
+- 단순히 단어를 암기하는 것만으로 실제 상황에서 자연스럽게 활용할 수 있을까?
+- 어떻게 하면 단어를 오래 기억할 수 있을까?
 
-```bash
-$ npm install
-```
+기존의 암기 중심 학습 방식은 실제 상황에서 단어를 활용하기 어렵고, 단순 반복 학습만으로는 문맥 이해와 장기 기억이 부족해 학습 효율성이 떨어집니다.
 
-## Compile and run the project
+### ✅ 문제 정의 및 해결 목표
 
-```bash
-# development
-$ npm run start
+에코링고는 이러한 문제를 해결하는 것을 목표로 합니다.
 
-# watch mode
-$ npm run start:dev
+- **단순 암기가 아닌 문맥을 기반으로 학습하여, 실제 상황에서 자연스럽게 단어를 활용할 수 있도록 지원**
+- **효과적인 간격 반복 학습을 통해 장기 기억으로 정착**
 
-# production mode
-$ npm run start:prod
-```
+이를 위해 에코링고는 **AI를 통해 더 효과적인 학습 방식을 제공**합니다.
 
-## Run tests
+## 주요 기능
 
-```bash
-# unit tests
-$ npm run test
+### 단어별 난이도 측정
 
-# e2e tests
-$ npm run test:e2e
+![Image](https://github.com/user-attachments/assets/10fbc947-3992-427a-8713-f5f259b6a8a2)
+등록된 단어들의 난이도를 CEFR 표준을 통해 측정하여 맞춤형 학습이 가능하도록 도와줍니다.
 
-# test coverage
-$ npm run test:cov
-```
+### 단어별 예문 생성
 
-## Deployment
+![Image](https://github.com/user-attachments/assets/9169305e-61d3-44e8-8906-c4a9702606c6)
+학습한 단어가 실제 문장에서 어떻게 사용되는지 적절한 예문을 생성하여 제공합니다. <br/>
+단순한 암기가 아니라 **문맥 속에서 단어를 자연스럽게** 익힐 수 있습니다.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 복습 퀴즈
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+![Image](https://github.com/user-attachments/assets/0bcc3a69-3218-4047-94f3-d81ce3c45df2)
+단어의 **난이도를 통해 간격 반복 학습(SM2) 알고리즘**을 적용하여, 사용자가 최적의 타이밍에 단어를 복습할 수 있도록 합니다.<br/>
+문맥 속에서 단어를 자연스럽게 익힐 수 있으며, **효과적인 복습을 통해 장기 기억화**를 돕습니다.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+### 맞춤형 아티클 생성
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+![Image](https://github.com/user-attachments/assets/fd7f8c81-51c9-47fb-8d18-680c3cf91890)
+사용자가 지정한 카테고리 & 레벨에 맞춰 아티클을 생성합니다. <br/>
+다양한 주제의 아티클을 읽으며 **영어에 노출되는 환경을 형성하고, 레벨에 적합한 자연스러운 영어 문장을 접하며 전반적인 언어 감각**을 키웁니다.
 
-## Resources
+### 실전 대화
 
-Check out a few resources that may come in handy when working with NestJS:
+![Image](https://github.com/user-attachments/assets/e6c215e7-255e-4f1e-bbfc-2b6bfaf6bf96)
+대화 토픽을 선정해 AI 튜터와의 대화를 통해 자연스럽게 영어 회화를 연습합니다.<br/>
+단순한 대화가 아닌 AI가 **사용자의 대화를 문법적, 어휘적으로 분석하고 피드백을 제공해 더 정확하고 자연스러운 표현**을 익힐 수 있습니다.<br/>
+실제 대화와 유사한 방식으로 영어를 연습하며 보다 **실전적인 커뮤니케이션 능력**을 기를 수 있습니다.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 개발 환경
